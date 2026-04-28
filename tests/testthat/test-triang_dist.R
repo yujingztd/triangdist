@@ -14,13 +14,13 @@ test_that("dtriang calculates correctly the density", {
   expect_equal(dtriang(4, min = 0, max = 3, mode = 1), 0)
 
   # Valid value (ex. x = 0.5)
-  expect_equal(dtriang(0.5, min = 0, max = 3, mode = 1), 1/3)
+  expect_equal(dtriang(0.5, min = 0, max = 3, mode = 1), 1 / 3)
 
   # Valid value (ex. x = 1)
-  expect_equal(dtriang(1, min = 0, max = 3, mode = 1), 2/3)
+  expect_equal(dtriang(1, min = 0, max = 3, mode = 1), 2 / 3)
 
   # Valid value (ex. x = 2)
-  expect_equal(dtriang(2, min = 0, max = 3, mode = 1), 1/3)
+  expect_equal(dtriang(2, min = 0, max = 3, mode = 1), 1 / 3)
 })
 
 
@@ -32,15 +32,18 @@ test_that("ptriang validates parameters and calculates probabilities", {
   expect_error(ptriang(1, min = 0, max = 3, mode = 4))
 
   # Operations
-  expect_equal(ptriang(-1, min = 0, max = 3, mode = 1), 0) # Antes del min
-  expect_equal(ptriang(4, min = 0, max = 3, mode = 1), 1)  # Después del max
-  expect_equal(ptriang(1, min = 0, max = 3, mode = 1), 1/3) # Exactamente en la moda
+  # Before 'min'
+  expect_equal(ptriang(-1, min = 0, max = 3, mode = 1), 0)
+  # After 'max'
+  expect_equal(ptriang(4, min = 0, max = 3, mode = 1), 1)
+  # At mode
+  expect_equal(ptriang(1, min = 0, max = 3, mode = 1), 1 / 3)
 
   # Probability (ex. x = 2)
-  expect_equal(ptriang(2, min = 0, max = 3, mode = 1), 5/6)
+  expect_equal(ptriang(2, min = 0, max = 3, mode = 1), 5 / 6)
 
   # Probability (ex. x = 0.5)
-  expect_equal(ptriang(0.5, min = 0, max = 3, mode = 1), 1/12)
+  expect_equal(ptriang(0.5, min = 0, max = 3, mode = 1), 1 / 12)
 })
 
 
