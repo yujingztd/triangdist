@@ -77,7 +77,7 @@ test_that("rtriang uses a strict validation and generates numbers", {
   # Verify that it actually generates what it should.
   generated <- rtriang(100, min = 0, max = 3, mode = 1)
   # Has it generated 100 numbers?
-  expect_length(generados, 100)
+  expect_length(generated, 100)
   # Are they all inside the triangle?
-  expect_true(all(generados >= 0 & generados <= 3))
+  expect_true(all(generated >= 0 & generated <= 3))
 })
