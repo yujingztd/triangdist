@@ -22,7 +22,7 @@ dtriang <- function(x, min, max, mode) {
                          (2 * (x - min)) / ((max - min) * (mode - min)),
                          (2 * (max - x)) / ((max - min) * (max - mode))))
 
-  return(d_res)
+  d_res
 }
 
 
@@ -46,8 +46,9 @@ ptriang <- function(q, min, max, mode) {
                   ifelse(q >= max, 1,
                          ifelse(q < mode,
                                 ((q - min) ^ 2) / ((max - min) * (mode - min)),
-                                1 - (((max - q) ^ 2) / ((max - min) * (max - mode))))))
-  return(p_res)
+                                1 - (((max - q) ^ 2) /
+                                       ((max - min) * (max - mode))))))
+  p_res
 }
 
 
@@ -59,7 +60,7 @@ ptriang <- function(q, min, max, mode) {
 #' @param mode mode of the distribution (c).
 #' @return A vector of quantiles.
 #' @export
-qtriang <- function(p, min, max ,mode) {
+qtriang <- function(p, min, max, mode) {
   if (any(min > max, na.rm = TRUE)) {
     stop("Error: 'min' cannot be grater tahn 'max'.")
   }
@@ -73,10 +74,10 @@ qtriang <- function(p, min, max ,mode) {
   p_mode <- (mode - min) / (max - min)
 
   q_res <- ifelse(p <= p_mode,
-    min + sqrt(p * (max - min) * (mode - min)),
-    max - sqrt((1 - p) * (max - min) * (max - mode)))
+                  min + sqrt(p * (max - min) * (mode - min)),
+                  max - sqrt((1 - p) * (max - min) * (max - mode)))
 
-  return(q_res)
+  q_res
 }
 
 
@@ -103,18 +104,5 @@ rtriang <- function(n, min, max, mode) {
 
   r_res <- qtriang(p_random, min, max, mode)
 
-  return(r_res)
+  r_res
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
