@@ -24,3 +24,28 @@ dtriang <- function(x, min, max, mode) {
 
   return(d_res)
 }
+
+
+#' Distribution function (ptriang)
+#'
+#' @param q vector of quantiles.
+#' @param min lower limit of the distribution (a).
+#' @param max upper limit of the distribution (b).
+#' @param mode mode of the distribution (c).
+#' @return A vector of probabilities.
+#' @export
+ptriang <- function(q, min, max, mode) {
+  if (any(min > max, na.rm = TRUE)) {
+    stop("Error: 'min' cannot be greater than 'max'.")
+  }
+  if (any(mode < min | mode > max, na.rm = TRUE)) {
+    stop("Error: 'mode' must be between 'min' and 'max'.")
+  }
+
+  p_res <- ifelse(q <= min, 0,
+                  ifelse(q >= max, 1,
+                         ifelse(q > mode,
+                                ((q - min) ^ 2) / ((max - min) * (mode - min)),
+                                1 - (((max - q) ^ 2) / ((max - min) * (max - mode))))))
+  return(p_res)
+}
