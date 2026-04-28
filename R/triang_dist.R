@@ -44,7 +44,7 @@ ptriang <- function(q, min, max, mode) {
 
   p_res <- ifelse(q <= min, 0,
                   ifelse(q >= max, 1,
-                         ifelse(q > mode,
+                         ifelse(q < mode,
                                 ((q - min) ^ 2) / ((max - min) * (mode - min)),
                                 1 - (((max - q) ^ 2) / ((max - min) * (max - mode))))))
   return(p_res)
