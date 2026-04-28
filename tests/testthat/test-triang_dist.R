@@ -39,3 +39,19 @@ test_that("ptriang validates parameters and calculates probabilities", {
   # Probability (ex. x = 2)
   expect_equal(ptriang(2, min = 0, max = 3, mode = 1), 5/6)
 })
+
+
+# TESTS qtriang
+test_that("qtriang validates 'p' and calculates quantiles", {
+  # Errors
+  expect_error(qtriang(0.5, min = 3, max = 1, mode = 2))
+  # Negative probability
+  expect_error(qtriang(-0.1, min = 0, max = 3, mode = 1))
+  # Probability greater than 1
+  expect_error(qtriang(1.2, min = 0, max = 3, mode = 1))
+
+  # Operations
+  expect_equal(qtriang(0, min = 0, max = 3, mode = 1), 0)
+  expect_equal(qtriang(1, min = 0, max = 3, mode = 1), 3)
+  expect_equal(qtriang(1/3, min = 0, max = 3, mode = 1), 1)
+})
