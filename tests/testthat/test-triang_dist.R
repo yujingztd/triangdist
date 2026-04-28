@@ -61,8 +61,8 @@ test_that("qtriang validates 'p' and calculates quantiles", {
   # Operations
   expect_equal(qtriang(0, min = 0, max = 3, mode = 1), 0)
   expect_equal(qtriang(1, min = 0, max = 3, mode = 1), 3)
-  expect_equal(qtriang(1/3, min = 0, max = 3, mode = 1), 1)
-  expect_equal(qtriang(5/6, min = 0, max = 3, mode = 1), 2)
+  expect_equal(qtriang(1 / 3, min = 0, max = 3, mode = 1), 1)
+  expect_equal(qtriang(5 / 6, min = 0, max = 3, mode = 1), 2)
 })
 
 
