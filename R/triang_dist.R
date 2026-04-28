@@ -80,6 +80,36 @@ qtriang <- function(p, min, max ,mode) {
 }
 
 
+#' Random generation (rtriang)
+#'
+#' @param n number of observations.
+#' @param min lower limit of the distribution (a).
+#' @param max upper limit of the distribution (b).
+#' @param mode mode of the distribution (c).
+#' @return A vector of random deviates.
+#' @export
+rtriang <- function(n, min, max, mode) {
+  if (any(min > max, na.rm = TRUE)) {
+    stop("Error: 'min' cannot be greater than 'max'.")
+  }
+  if (any(mode < min | mode > max, na.rm = TRUE)) {
+    stop("Error: 'mode' must be between 'min' and 'max'.")
+  }
+  if (length(n) != 1 || !is.numeric(n) || n %% 1 != 0 || n <= 0) {
+    stop("Error: 'n' must be a single positive integer greater than 0.")
+  }
+
+  p_random <- runif(n, min = 0, max = 1)
+
+  r_res <- qtriang(p_random, min, max, mode)
+
+  return(r_res)
+}
+
+
+
+
+
 
 
 
