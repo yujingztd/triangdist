@@ -49,3 +49,42 @@ ptriang <- function(q, min, max, mode) {
                                 1 - (((max - q) ^ 2) / ((max - min) * (max - mode))))))
   return(p_res)
 }
+
+
+#' Quantile function (qtriang)
+#'
+#' @param p vector of probabilities.
+#' @param min lower limit of the distribution (a).
+#' @param max upper limit of the distribution (b).
+#' @param mode mode of the distribution (c).
+#' @return A vector of quantiles.
+#' @export
+qtriang <- function(p, min, max ,mode) {
+  if (any(min > max, na.rm = TRUE)) {
+    stop("Error: 'min' cannot be grater tahn 'max'.")
+  }
+  if (any(mode < min | mode > max, na.rm = TRUE)) {
+    stop("Error: 'mode' must be between 'min' and 'max'.")
+  }
+  if (any(p < 0 | p > 1, na.rm = TRUE)) {
+    stop("Error: 'p' must be between 0 and 1.")
+  }
+
+  p_mode <- (mode - min) / (max - min)
+
+  q_res <- ifelse(p <= p_mode,
+    min + sqrt(p * (max - min) * (mode - min)),
+    max - sqrt((1 - p) * (max - min) * (max - mode)))
+
+  return(q_res)
+}
+
+
+
+
+
+
+
+
+
+
