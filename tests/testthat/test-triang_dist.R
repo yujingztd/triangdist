@@ -55,3 +55,29 @@ test_that("qtriang validates 'p' and calculates quantiles", {
   expect_equal(qtriang(1, min = 0, max = 3, mode = 1), 3)
   expect_equal(qtriang(1/3, min = 0, max = 3, mode = 1), 1)
 })
+
+
+# TEST rtriang
+test_that("rtriang uses a strict validation and generates numbers", {
+  # Errors
+  expect_error(rtriang(5, min = 3, max = 1, mode = 2))
+
+  # Tests for values 'n'
+  # Zero
+  expect_error(rtriang(0, min = 0, max = 3, mode = 1))
+  # Negative number
+  expect_error(rtriang(-5, min = 0, max = 3, mode = 1))
+  # Floats
+  expect_error(rtriang(1.5, min = 0, max = 3, mode = 1))
+  # Strings
+  expect_error(rtriang("diez", min = 0, max = 3, mode = 1))
+  # Vectors
+  expect_error(rtriang(c(2, 3), min = 0, max = 3, mode = 1))
+
+  # Verify that it actually generates what it should.
+  generated <- rtriang(100, min = 0, max = 3, mode = 1)
+  # Has it generated 100 numbers?
+  expect_length(generados, 100)
+  # Are they all inside the triangle?
+  expect_true(all(generados >= 0 & generados <= 3))
+})
