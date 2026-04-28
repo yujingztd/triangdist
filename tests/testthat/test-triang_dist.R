@@ -38,6 +38,9 @@ test_that("ptriang validates parameters and calculates probabilities", {
 
   # Probability (ex. x = 2)
   expect_equal(ptriang(2, min = 0, max = 3, mode = 1), 5/6)
+
+  # Probability (ex. x = 0.5)
+  expect_equal(ptriang(0.5, min = 0, max = 3, mode = 1), 1/12)
 })
 
 
@@ -54,6 +57,7 @@ test_that("qtriang validates 'p' and calculates quantiles", {
   expect_equal(qtriang(0, min = 0, max = 3, mode = 1), 0)
   expect_equal(qtriang(1, min = 0, max = 3, mode = 1), 3)
   expect_equal(qtriang(1/3, min = 0, max = 3, mode = 1), 1)
+  expect_equal(qtriang(5/6, min = 0, max = 3, mode = 1), 2)
 })
 
 
@@ -80,4 +84,12 @@ test_that("rtriang uses a strict validation and generates numbers", {
   expect_length(generated, 100)
   # Are they all inside the triangle?
   expect_true(all(generated >= 0 & generated <= 3))
+})
+
+
+
+# TEST vectors
+test_that("the functions does manage correctly vectors", {
+  expect_length(dtriang(c(0.5, 2), min = 0, max = 3, mode = 1), 2)
+  expect_length(ptriang(c(0.5, 2), min = 0, max = 3, mode = 1), 2)
 })
