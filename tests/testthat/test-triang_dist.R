@@ -52,6 +52,8 @@ test_that("qtriang validates 'p' and calculates quantiles", {
   expect_error(qtriang(-0.1, min = 0, max = 3, mode = 1))
   # Probability greater than 1
   expect_error(qtriang(1.2, min = 0, max = 3, mode = 1))
+  # Mode out of range
+  expect_error(qtriang(0.5, min = 0, max = 3, mode = 4))
 
   # Operations
   expect_equal(qtriang(0, min = 0, max = 3, mode = 1), 0)
@@ -77,6 +79,8 @@ test_that("rtriang uses a strict validation and generates numbers", {
   expect_error(rtriang("diez", min = 0, max = 3, mode = 1))
   # Vectors
   expect_error(rtriang(c(2, 3), min = 0, max = 3, mode = 1))
+  # Mode out of range
+  expect_error(rtriang(5, min = 0, max = 3, mode = 4))
 
   # Verify that it actually generates what it should.
   generated <- rtriang(100, min = 0, max = 3, mode = 1)
